@@ -845,7 +845,16 @@ export class UI {
 			player = game.activeCreature.player.id;
 		}
 
-		// Set dash active
+		this.selectedCreature = creatureType;
+		let stats = game.retrieveCreatureStats(creatureType);
+
+		// Load artwork
+		this.game.getImage(getUrl('units/artwork/' + stats.name));
+		$j('#card .sideA').css({
+			'background-image': `url('${getUrl('cards/margin')}'), url('${getUrl(
+				'units/artwork/' + stats.name,
+			)}')`,
+		});
 		this.$dash.addClass('active');
 		this.$dash.children('#tooltip').removeClass('active');
 		this.$dash.children('#playertabswrapper').addClass('active');
@@ -888,9 +897,6 @@ export class UI {
 			.filter("[creature='" + creatureType + "']")
 			.addClass('active');
 
-		this.selectedCreature = creatureType;
-		let stats = game.retrieveCreatureStats(creatureType);
-
 		// TODO card animation
 		if (
 			$j.inArray(creatureType, game.players[player].availableCreatures) > 0 ||
@@ -904,12 +910,6 @@ export class UI {
 				}
 			});
 
-			// Card A
-			$j('#card .sideA').css({
-				'background-image': `url('${getUrl('cards/margin')}'), url('${getUrl(
-					'units/artwork/' + stats.name,
-				)}')`,
-			});
 			$j('#card .sideA .section.info')
 				.removeClass('sin- sinA sinE sinG sinL sinP sinS sinW')
 				.addClass('sin' + stats.type.substring(0, 1));
@@ -1101,12 +1101,6 @@ export class UI {
 				}
 			}
 		} else {
-			// Card A
-			$j('#card .sideA').css({
-				'background-image': `url('${getUrl('cards/margin')}'), url('${getUrl(
-					'units/artwork/' + stats.name,
-				)}')`,
-			});
 			$j('#card .sideA .section.info')
 				.removeClass('sin- sinA sinE sinG sinL sinP sinS sinW')
 				.addClass('sin' + stats.type.substring(0, 1));

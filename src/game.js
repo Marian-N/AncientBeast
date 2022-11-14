@@ -208,9 +208,6 @@ export default class Game {
 			// Load unit shouts
 			this.soundsys.getSound(getUrl('units/shouts/' + name), 1000 + creatureId);
 
-			// Load artwork
-			this.getImage(getUrl('units/artwork/' + name));
-
 			if (name == 'Dark Priest') {
 				for (i = 0, count = dpcolor.length; i < count; i++) {
 					this.Phaser.load.image(
